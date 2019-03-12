@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
     	var next_step = true;
     	
     	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
-    		if( $(this).val() == "" ) {
+    		if( $(this).val() == "" && !$(this).hasClass("ignore")) {
     			$(this).addClass('input-error');
     			next_step = false;
     		}
@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
     $('.registration-form').on('submit', function(e) {
     	
     	$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
-    		if( $(this).val() == "" ) {
+    		if( $(this).val() == "" && !$(this).hasClass("ignore")) {
     			e.preventDefault();
     			$(this).addClass('input-error');
     		}
