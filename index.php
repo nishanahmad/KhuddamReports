@@ -48,6 +48,7 @@ if(isset($_SESSION["user_name"]))
 			<link rel="stylesheet" href="assets/css/jquery-ui.css">
 			<link rel="stylesheet" href="assets/css/loadBar.css">
 			<link rel="stylesheet" href="assets/css/indexTable.css">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 			<!-- Favicon and touch icons -->
 			<link rel="shortcut icon" href="assets/ico/favicon.png">
@@ -131,7 +132,7 @@ if(isset($_SESSION["user_name"]))
 				<td>										<?php 
 					if(isset($reportMap[$i]))
 					{
-						$percentage = $reportMap[$report['month']]['percentage']?>
+						$percentage = $reportMap[$i]['percentage']?>
 						<div class="meter">
 						  <span style="width:<?php echo $percentage;?>%"></span>
 						  <p><?php echo $percentage;?>%</p>
@@ -148,11 +149,22 @@ if(isset($_SESSION["user_name"]))
 				<td><?php 
 					if(!isset($reportMap[$i]))
 					{																									?>
-						<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-info">Create Report</a>									<?php	
-					}																									?>	
+						<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-success" style="width:140px;">Create New <i class="fas fa-chevron-right"></i></a>									<?php	
+					}
+					else
+					{
+						if($reportMap[$i]['percentage'] < 100)
+						{																													?>
+							<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:140px;">Continue  <i class="fas fa-pen"></i></a><?php							
+						}
+						else
+						{																													?>
+							<a href="generate.php?id=<?php echo $report['id'];?>" class="btn btn-success" style="width:140px;">Download PDF  <i class="far fa-file-pdf"></i></a>				<?php							
+						}							
+					}																														?>	
 				</td>
-			</tr>																										<?php
-		}																												?>			
+			</tr>																															<?php
+		}																																	?>			
     </tbody>
   </table>												
 											</div>
