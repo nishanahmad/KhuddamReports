@@ -47,6 +47,7 @@ if(isset($_SESSION["user_name"]))
 			<link rel="stylesheet" href="assets/css/style.css">
 			<link rel="stylesheet" href="assets/css/jquery-ui.css">
 			<link rel="stylesheet" href="assets/css/loadBar.css">
+			<link rel="stylesheet" href="assets/css/indexTable.css">
 
 			<!-- Favicon and touch icons -->
 			<link rel="shortcut icon" href="assets/ico/favicon.png">
@@ -96,11 +97,6 @@ if(isset($_SESSION["user_name"]))
 				<div class="inner-bg">
 					<div class="container">
 						<div class="row">
-							<div class="col-sm-8 col-sm-offset-2 text">
-								<h1><strong><?php echo $jamath['name'].' '.$year;?></strong></h1>
-							</div>
-						</div>
-						<div class="row">
 							<div class="col-sm-8 col-sm-offset-2 form-box">
 								<form role="form" action="" method="post" class="registration-form">
 									<fieldset>
@@ -116,39 +112,49 @@ if(isset($_SESSION["user_name"]))
 													</select>
 												</div>
 												<br/>
-												<div class="form-group">											
-													<table border="1">																	<?php
-													for($i=1;$i<=12;$i++)
-													{																		?>
-														<tr>
-															<td style="padding:10px;"><?php echo getMonth($i);?></td>
-															<td style="padding:10px;">										<?php 
-																if(isset($reportMap[$i]))
-																{
-																	$percentage = $reportMap[$report['month']]['percentage']?>
-																	<div class="meter">
-																	  <span style="width:<?php echo $percentage;?>%"></span>
-																	  <p><?php echo $percentage;?>%</p>
-																	</div><?php																	
-																}
-																else
-																{?>
-																	<div class="meter">
-																	  <span style="width:0%"></span>
-																	  <p>0%</p>
-																	</div>															<?php																																		
-																}																	?>
-															</td>
-															<td style="padding:15px;">																				<?php 
-																if(!isset($reportMap[$i]))
-																{																									?>
-																	<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-info">Create Report</a>									<?php	
-																}																									?>	
-															</td>
-														</tr>																										<?php
-													}																												?>
-													</table>
-												</div>	
+  <table class="responsive-table">
+    <caption><?php echo $jamath['name'].' '.$year;?></caption>
+    <thead>
+      <tr>
+        <th scope="col">Month</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tfoot>
+    </tfoot>
+    <tbody>																		<?php
+		for($i=1;$i<=12;$i++)
+		{																		?>
+			<tr>
+				<th scope="row"><?php echo getMonth($i);?></th>
+				<td>										<?php 
+					if(isset($reportMap[$i]))
+					{
+						$percentage = $reportMap[$report['month']]['percentage']?>
+						<div class="meter">
+						  <span style="width:<?php echo $percentage;?>%"></span>
+						  <p><?php echo $percentage;?>%</p>
+						</div><?php																	
+					}
+					else
+					{?>
+						<div class="meter">
+						  <span style="width:0%"></span>
+						  <p>0%</p>
+						</div>															<?php																																		
+					}																	?>
+				</td>
+				<td><?php 
+					if(!isset($reportMap[$i]))
+					{																									?>
+						<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-info">Create Report</a>									<?php	
+					}																									?>	
+				</td>
+			</tr>																										<?php
+		}																												?>			
+    </tbody>
+  </table>												
 											</div>
 										</div>
 									</fieldset>

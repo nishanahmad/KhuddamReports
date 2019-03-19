@@ -1,12 +1,10 @@
 div.meter {
   position: relative;
-  width: 200px;
+  width: 90%;
   height: 25px;
   border: 1px solid #b0b0b0;
-  margin-top: 10px;
-  /* viewing purposes */
-  margin-left: 10px;
-  /* viewing purposes */
+  margin: 10px;
+
   -webkit-box-shadow: inset 0 3px 5px 0 #d3d0d0;
   -moz-box-shadow: inset 0 3px 5px 0 #d3d0d0;
   box-shadow: inset 0 3px 5px 0 #d3d0d0;
