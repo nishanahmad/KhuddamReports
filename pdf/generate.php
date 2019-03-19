@@ -11,7 +11,15 @@ $reportId = $_GET['id'];
 $block1Query = mysqli_query($con,"SELECT * FROM block1 WHERE report_id = $reportId") or die(mysqli_error($con));
 $block1= mysqli_fetch_array($block1Query,MYSQLI_ASSOC);	
 $block2Query = mysqli_query($con,"SELECT * FROM block2 WHERE report_id = $reportId") or die(mysqli_error($con));
-$block2= mysqli_fetch_array($block2Query,MYSQLI_ASSOC);	
+$block2= mysqli_fetch_array($block2Query,MYSQLI_ASSOC);
+$block3Query = mysqli_query($con,"SELECT * FROM block3 WHERE report_id = $reportId") or die(mysqli_error($con));
+$block3= mysqli_fetch_array($block3Query,MYSQLI_ASSOC);
+$block4Query = mysqli_query($con,"SELECT * FROM block4 WHERE report_id = $reportId") or die(mysqli_error($con));
+$block4= mysqli_fetch_array($block4Query,MYSQLI_ASSOC);	
+$block5Query = mysqli_query($con,"SELECT * FROM block5 WHERE report_id = $reportId") or die(mysqli_error($con));
+$block5= mysqli_fetch_array($block5Query,MYSQLI_ASSOC);
+$block6Query = mysqli_query($con,"SELECT * FROM block6 WHERE report_id = $reportId") or die(mysqli_error($con));
+$block6= mysqli_fetch_array($block6Query,MYSQLI_ASSOC);	
 
 // initiate FPDI
 $pdf = new Fpdi();
@@ -130,29 +138,289 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++)
 		//BLOCK 3
 		$pdf->SetXY(108, 138);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, 'Nishan Ahmed');								
+		$pdf->Write(8, $block3['c1']);
 		
 		$pdf->SetXY(82, 147);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, 'Yes');										
+		$pdf->Write(8, $block3['c2']);
 		
+		if($block3['c3'] != null)
+			$block3['c3'] = date('d-m-Y',strtotime($block3['c3']));		
 		$pdf->SetXY(82, 153);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, '09-03-2019');												
+		$pdf->Write(8, $block3['c3']);
 		
 		$pdf->SetXY(180, 148);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, 'Yes');
+		$pdf->Write(8, $block3['c4']);
 		
 		$pdf->SetXY(85, 162);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, '1');										
+		$pdf->Write(8, $block3['c5']);
 
 		$pdf->SetXY(180, 162);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, '2');												
+		$pdf->Write(8, $block3['c6']);
 		
+		//BLOCK 4		
+		$pdf->SetXY(110, 195);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c1']);
+
+		$pdf->SetXY(108, 203);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c2']);
+
+		$pdf->SetXY(108, 207);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c3']);
+
+		$pdf->SetXY(188, 205);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c4']);
+
+		$pdf->SetXY(48, 228);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c5']);		
+		
+		$pdf->SetXY(72, 228);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c6']);
+
+		$pdf->SetXY(92, 228);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c7']);
+
+		$pdf->SetXY(116, 228);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c8']);
+
+		$pdf->SetXY(142, 228);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c9']);
+
+		$pdf->SetXY(178, 228);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c10']);
+
+		$pdf->SetXY(48, 237);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c11']);
+
+		$pdf->SetXY(72, 237);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c12']);
+
+		$pdf->SetXY(92, 237);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c13']);
+
+		$pdf->SetXY(116, 237);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c14']);
+
+		$pdf->SetXY(142, 237);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c15']);
+
+		$pdf->SetXY(178, 237);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c16']);
+
+		$pdf->SetXY(88, 247);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c17']);
+
+		$pdf->SetXY(190, 246);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c18']);
+
+		$pdf->SetXY(190, 251);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c19']);
+
+		$pdf->SetXY(118, 260);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c20']);
+
+		$pdf->SetXY(178, 260);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block4['c21']);		
+
+
 	}
+	if($pageNo == 2)
+	{
+		//BLOCK 5		
+		$pdf->SetXY(115, 8);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c1']);
+
+		$pdf->SetXY(62, 20);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c2']);
+
+		$pdf->SetXY(116, 20);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c3']);
+
+		$pdf->SetXY(192, 20);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c4']);
+
+		$pdf->SetXY(60, 35);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c5']);
+
+		$pdf->SetXY(116, 35);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c6']);
+
+		$pdf->SetXY(192, 35);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c7']);
+
+		$pdf->SetXY(116, 51);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c8']);
+
+		$pdf->SetXY(192, 51);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c9']);
+
+		$pdf->SetXY(82, 65);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c10']);
+
+		$pdf->SetXY(192, 65);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c11']);
+
+		$pdf->SetXY(64, 80);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c12']);
+
+		$pdf->SetXY(120, 80);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c13']);	
+
+		$pdf->SetXY(192, 80);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c14']);
+
+		$pdf->SetXY(120, 94);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c15']);	
+
+		$pdf->SetXY(192, 94);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block5['c16']);
+
+		//BLOCK 6
+		$pdf->SetXY(110, 127);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c1']);
+
+		$pdf->SetXY(62, 154);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c2']);
+
+		$pdf->SetXY(88, 154);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c3']);		
+		
+		$pdf->SetXY(122, 154);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c4']);		
+		
+		$pdf->SetXY(148, 154);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c5']);		
+		
+		$pdf->SetXY(172, 154);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c6']);
+
+		$pdf->SetXY(192, 154);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c7']);
+
+		$pdf->SetXY(62, 169);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c8']);
+
+		$pdf->SetXY(88, 169);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c9']);		
+		
+		$pdf->SetXY(122, 169);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c10']);		
+		
+		$pdf->SetXY(148, 169);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c11']);		
+		
+		$pdf->SetXY(172, 169);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c12']);
+
+		$pdf->SetXY(192, 169);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c13']);
+
+		$pdf->SetXY(162, 181);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c14']);
+
+		$pdf->SetXY(174, 181);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c15']);
+
+		$pdf->SetXY(163, 186);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c16']);
+
+		$pdf->SetXY(92, 194);
+		$pdf->SetFontSize(9);
+		$pdf->Write(8, $block6['c17']);
+
+		if($block6['c18'] != null)
+			$block6['c18'] = date('d-m-Y',strtotime($block6['c18']));
+		$pdf->SetXY(92, 198);
+		$pdf->SetFontSize(9);
+		$pdf->Write(8, $block6['c18']);
+
+		$pdf->SetXY(92, 202);
+		$pdf->SetFontSize(9);
+		$pdf->Write(8, $block6['c19']);
+
+		$pdf->SetXY(182, 194);
+		$pdf->SetFontSize(9);
+		$pdf->Write(8, $block6['c20']);
+
+		$pdf->SetXY(182, 198);
+		$pdf->SetFontSize(9);
+		$pdf->Write(8, $block6['c21']);		
+		
+		if($block6['c22'] != null)
+			$block6['c22'] = date('d-m-Y',strtotime($block6['c22']));		
+		$pdf->SetXY(182, 202);
+		$pdf->SetFontSize(8);
+		$pdf->Write(8, $block6['c22']);
+
+		$pdf->SetXY(64, 212);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c23']);
+
+		$pdf->SetXY(135, 212);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c24']);
+
+		$pdf->SetXY(190, 212);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block6['c25']);		
+	}					
 }
 
 // Output the new PDF
