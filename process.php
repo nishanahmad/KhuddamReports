@@ -195,8 +195,8 @@ if(isset($_SESSION["user_name"]))
 			}
 			else
 			{
-				$query3="UPDATE block3 SET report_id='$reportId',c1='$b3c1',c2=".var_export($b3c2, true).",c3='$b3c3',c4='$b3c4',
-						c5='$b3c5',c6='$b3c6'";
+				$query3="UPDATE block3 SET c1='$b3c1',c2='$b3c2',c3=".var_export($b3c3, true).",c4='$b3c4',
+						c5='$b3c5',c6='$b3c6' WHERE report_id=$reportId";
 
 				$update3 = mysqli_query($con, $query3);	
 				if(!$update3)
