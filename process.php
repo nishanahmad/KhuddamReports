@@ -139,7 +139,7 @@ if(isset($_SESSION["user_name"]))
 				$query2="UPDATE block2 SET report_id='$reportId',c1='$b2c1',c2=".var_export($b2c2, true).",c3='$b2c3',c4='$b2c4',
 						c5='$b2c5',c6='$b2c6',c7=".var_export($b2c7, true).",c8='$b2c8'";
 
-				$update2 = mysqli_query($con, $query1);	
+				$update2 = mysqli_query($con, $query2);	
 				if(!$update2)
 					$error =  mysqli_error($con);				
 			}
