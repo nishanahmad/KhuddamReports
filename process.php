@@ -176,8 +176,8 @@ if(isset($_SESSION["user_name"]))
 			$b3c5 = $block3["c5"];
 			$b3c6 = $block3["c6"];
 			
-			$search2 = mysqli_query($con, "SELECT * FROM block2 WHERE report_id=$reportId");
-			if(mysqli_num_rows($search2) <=0)
+			$search3 = mysqli_query($con, "SELECT * FROM block3 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search3) <=0)
 			{
 				$query3="INSERT INTO block3 (report_id,c1,c2,c3,c4,c5,c6)
 					 VALUES
@@ -245,19 +245,34 @@ if(isset($_SESSION["user_name"]))
 			$b4c20 = $block4["c20"];
 			$b4c21 = $block4["c21"];
 			
-			$query4="INSERT INTO block4 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21)
-				 VALUES
-				 ($reportId,'$b4c1','$b4c2','$b4c3','$b4c4','$b4c5','$b4c6','$b4c7','$b4c8','$b4c9','$b4c10',
-				 '$b4c11','$b4c12','$b4c13','$b4c14','$b4c15','$b4c16','$b4c17','$b4c18','$b4c19','$b4c20','$b4c21')";
+			$search4 = mysqli_query($con, "SELECT * FROM block4 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search4) <=0)			
+			{
+				$query4="INSERT INTO block4 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21)
+					 VALUES
+					 ($reportId,'$b4c1','$b4c2','$b4c3','$b4c4','$b4c5','$b4c6','$b4c7','$b4c8','$b4c9','$b4c10',
+					 '$b4c11','$b4c12','$b4c13','$b4c14','$b4c15','$b4c16','$b4c17','$b4c18','$b4c19','$b4c20','$b4c21')";
 
-			$insert4 = mysqli_query($con, $query4);	
-			if(!$insert4)
-				$error =  mysqli_error($con);
+				$insert4 = mysqli_query($con, $query4);	
+				if(!$insert4)
+					$error =  mysqli_error($con);
+				else
+				{
+					$updateStatus = mysqli_query($con,"UPDATE reports SET status=4 WHERE id='$reportId'");
+					if(!$updateStatus)
+						$error =  mysqli_error($con);
+				}				
+			}
 			else
 			{
-				$updateStatus = mysqli_query($con,"UPDATE reports SET status=4 WHERE id='$reportId'");
-				if(!$updateStatus)
-					$error =  mysqli_error($con);
+				$query4="UPDATE block4 SET c1='$b4c1',c2='$b4c2',c3='$b4c3',c4='$b4c4',
+						c5='$b4c5',c6='$b4c6',c7='$b4c7',c8='$b4c8',c9='$b4c9',c10='$b4c10',c11='$b4c11',c12='$b4c12',
+						c13='$b4c13',c14='$b4c14',c15='$b4c15',c16='$b4c16',c17='$b4c17',c18='$b4c18',c19='$b4c19',c20='$b4c20',
+						c21='$b4c21' WHERE report_id=$reportId";
+
+				$update4 = mysqli_query($con, $query4);	
+				if(!$update4)
+					$error =  mysqli_error($con);								
 			}
 		}
 		else
