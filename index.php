@@ -68,7 +68,7 @@ if(isset($_SESSION["user_name"]))
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-					<a class="navbar-brand" href="index.html">Khuddamul Ahmadiyya Bharath Report Form</a>
+					<a class="navbar-brand" href="index.php">Khuddamul Ahmadiyya Bharath Report Form</a>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="top-navbar-1">
@@ -149,17 +149,18 @@ if(isset($_SESSION["user_name"]))
 				<td><?php 
 					if(!isset($reportMap[$i]))
 					{																									?>
-						<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-success" style="width:140px;">Create New <i class="fas fa-chevron-right"></i></a>									<?php	
+						<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-success" style="width:140px;">Create New <i class="fas fa-chevron-right"></i></a>									<?php	
 					}
 					else
 					{
 						if($reportMap[$i]['percentage'] < 100)
 						{																													?>
-							<a href="new.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:140px;">Continue  <i class="fas fa-pen"></i></a><?php							
+							<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:140px;">Continue  <i class="fas fa-pen"></i></a>
+							<a href="pdf/generate.php?id=<?php echo $report['id'];?>" class="btn btn-success" style="width:140px;">View PDF  <i class="far fa-file-pdf"></i></a>				<?php							
 						}
 						else
 						{																													?>
-							<a href="generate.php?id=<?php echo $report['id'];?>" class="btn btn-success" style="width:140px;">Download PDF  <i class="far fa-file-pdf"></i></a>				<?php							
+							<a href="pdf/generate.php?id=<?php echo $report['id'];?>" class="btn btn-success" style="width:140px;">Download PDF  <i class="far fa-file-pdf"></i></a>				<?php							
 						}							
 					}																														?>	
 				</td>

@@ -165,12 +165,18 @@ if(isset($_SESSION["user_name"]))
 		
 		
 		//BLOCK 5 assignment
+		$reportFlag = null;
 		if($reportId != null)
 		{		
 			$block5Query = mysqli_query($con,"SELECT * FROM block5 WHERE report_id = $reportId") or die(mysqli_error($con));
 			if(mysqli_num_rows($block5Query) <=0)
+			{
 				if($oldReportId != null)
-					$block5Query = mysqli_query($con,"SELECT * FROM block5 WHERE report_id = $oldReportId") or die(mysqli_error($con));	
+					$block5Query = mysqli_query($con,"SELECT * FROM block5 WHERE report_id = $oldReportId") or die(mysqli_error($con));					
+			}
+			else
+				$reportFlag = 'new';
+
 		}
 		else if($oldReportId != null)
 			$block5Query = mysqli_query($con,"SELECT * FROM block5 WHERE report_id = $oldReportId") or die(mysqli_error($con));	
@@ -180,21 +186,56 @@ if(isset($_SESSION["user_name"]))
 		$b5c4 = $block5['c4'];
 		$b5c9 = $block5['c9'];
 		$b5c10 = $block5['c10'];		
+		if($reportFlag == 'new')
+		{
+			$b5c2 = $block5['c2'];
+			$b5c3 = $block5['c3'];
+			$b5c5 = $block5['c5'];
+			$b5c6 = $block5['c6'];
+			$b5c7 = $block5['c7'];
+			$b5c8 = $block5['c8'];
+			$b5c11 = $block5['c11'];
+			$b5c12 = $block5['c12'];
+			$b5c13 = $block5['c13'];
+			$b5c14 = $block5['c14'];
+			$b5c15 = $block5['c15'];
+			$b5c16 = $block5['c16'];
+		}		
 		
 		//BLOCK 6 assignment
+		$reportFlag = null;
 		if($reportId != null)
 		{
 			$block6Query = mysqli_query($con,"SELECT * FROM block6 WHERE report_id = $reportId") or die(mysqli_error($con));
 			if(mysqli_num_rows($block6Query) <=0)
+			{
 				if($oldReportId != null)
-					$block6Query = mysqli_query($con,"SELECT * FROM block6 WHERE report_id = $oldReportId") or die(mysqli_error($con));				
+					$block6Query = mysqli_query($con,"SELECT * FROM block6 WHERE report_id = $oldReportId") or die(mysqli_error($con));								
+			}
+			else
+				$reportFlag = 'new';
+
 		}
 		else if($oldReportId != null)
 			$block6Query = mysqli_query($con,"SELECT * FROM block6 WHERE report_id = $oldReportId") or die(mysqli_error($con));				
 			
 		$block6= mysqli_fetch_array($block6Query,MYSQLI_ASSOC);	
 		$b6c1 = $block6['c1'];		
-		
+		if($reportFlag == 'new')
+		{
+			$b6c2 = $block6['c2'];		$b6c12 = $block6['c12'];
+			$b6c3 = $block6['c3'];		$b6c13 = $block6['c13'];
+			$b6c4 = $block6['c4'];		$b6c14 = $block6['c14'];
+			$b6c5 = $block6['c5'];		$b6c15 = $block6['c15'];
+			$b6c6 = $block6['c6'];		$b6c16 = $block6['c16'];
+			$b6c7 = $block6['c7'];		$b6c17 = $block6['c17'];
+			$b6c8 = $block6['c8'];		$b6c18 = $block6['c18'];
+			$b6c9 = $block6['c9'];		$b6c19 = $block6['c19'];
+			$b6c10 = $block6['c10'];	$b6c20 = $block6['c20'];
+			$b6c11 = $block6['c11'];	$b6c21 = $block6['c21'];
+			$b6c22 = $block6['c22'];	$b6c23 = $block6['c23'];
+			$b6c24 = $block6['c24'];	$b6c25 = $block6['c25'];
+		}
 	}
 ?>
 	<!DOCTYPE html>
@@ -219,6 +260,7 @@ if(isset($_SESSION["user_name"]))
 			<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
 			<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
 			<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 		</head>
 
 		<body>
@@ -232,7 +274,7 @@ if(isset($_SESSION["user_name"]))
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-					<a class="navbar-brand" href="index.html">Khuddamul Ahmadiyya Bharath Report Form</a>
+					<a class="navbar-brand" href="index.php">Khuddamul Ahmadiyya Bharath Report Form</a>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="top-navbar-1">
@@ -274,7 +316,7 @@ if(isset($_SESSION["user_name"]))
 									<fieldset id="f1">
 										<div class="form-top">
 											<div class="form-top-left">
-												<h3>General Info</h3>
+												<h3>1. General Info</h3>
 											</div>
 										</div>
 										<div class="form-bottom">
@@ -329,7 +371,7 @@ if(isset($_SESSION["user_name"]))
 											</div>
 											<div class="form-group">
 												<label for="b1c12">Qaid Name</label>
-												<input type="text" name="b1c12" class="form-control" id="b1c12" <?php if(isset($b1c12)) echo 'value='.$b1c12;?>>
+												<input type="text" name="b1c12" class="form-control" id="b1c12" <?php if(isset($b1c12)) echo 'value="'.$b1c12.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b1c13">Email</label>
@@ -340,6 +382,8 @@ if(isset($_SESSION["user_name"]))
 												<input type="text" name="b1c14" class="form-control" id="b1c14" <?php if(isset($b1c14)) echo 'value='.$b1c14;?>>
 											</div>										
 											<button type="button" class="btn btn-next" onClick="Block1()">Next</button>
+											
+											<button style="float:right" class="btn btn-success" onClick="Save1()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 1 END ------------------------->	
@@ -350,13 +394,13 @@ if(isset($_SESSION["user_name"]))
 									<fieldset id="f2">
 										<div class="form-top">
 											<div class="form-top-left">
-												<h3>ശുഅബ ഇഅതിമാദ്</h3>
+												<h3>2. ശുഅബ ഇഅതിമാദ്</h3>
 											</div>
 										</div>
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b2c1">മുഅതമിദിൻറെ പേര്</label>
-												<input type="text" name="b2c1" class="form-control" id="b2c1" <?php if(isset($b2c1)) echo 'value='.$b2c1;?>>
+												<input type="text" name="b2c1" class="form-control" id="b2c1" <?php if(isset($b2c1)) echo 'value="'.$b2c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b2c2">ആമില യോഗം നടന്ന തീയതി</label>
@@ -366,8 +410,8 @@ if(isset($_SESSION["user_name"]))
 												<label for="b2c3">യോഗത്തിൻറെ റിപ്പോർട്ട് വേറെ പേപ്പറിൽ ചേർത്തിട്ടുണ്ടോ?</label>
 												<select id="b2c3" name="b2c3" class="form-control">
 													<option value=""></option>
-													<option <?php if(isset($b2c3) && $b2c3 == 'Yes') echo 'selected';?>value="Yes">Yes</option>
-													<option <?php if(isset($b2c3) && $b2c3 == 'No') echo 'selected';?> value="No">No</option>													
+													<option <?php if(isset($b2c3) && $b2c3 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
+													<option <?php if(isset($b2c3) && $b2c3 == 'No') echo 'selected';?> value="No">No</option>
 												</select>
 											</div>				
 											<div class="form-group">
@@ -403,7 +447,7 @@ if(isset($_SESSION["user_name"]))
 												</select>
 											</div>																																	
 											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next" onclick="Block2()">Next</button>
+											<button type="button" class="btn btn-next" onclick="Block2(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 2 End ------------------------->	
@@ -414,13 +458,13 @@ if(isset($_SESSION["user_name"]))
 									<fieldset id="f3">
 										<div class="form-top">
 											<div class="form-top-left">
-												<h3>ശുഅബ തജ്‌നീദ് </h3>
+												<h3>3. ശുഅബ തജ്‌നീദ് </h3>
 											</div>
 										</div>
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b3c1">നാസിം തജ്‌നീദിൻറെ പേര്</label>
-												<input type="text" name="b3c1" class="form-control" id="b3c1" <?php if(isset($b3c1)) echo 'value='.$b3c1;?>>
+												<input type="text" name="b3c1" class="form-control" id="b3c1" <?php if(isset($b3c1)) echo 'value="'.$b3c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b3c2">തജ്‌നീദ് ഫോറം പൂരിപ്പിച് അയച്ചുവോ?</label>
@@ -450,7 +494,7 @@ if(isset($_SESSION["user_name"]))
 											</div>											
 											
 											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next">Next</button>
+											<button type="button" class="btn btn-next" onclick="Block3(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 3 End ------------------------->	
@@ -460,13 +504,13 @@ if(isset($_SESSION["user_name"]))
 									<fieldset id="f4">
 										<div class="form-top">
 											<div class="form-top-left">
-												<h3>ശുഅബ തഅലിം</h3>
+												<h3>4. ശുഅബ തഅലിം</h3>
 											</div>
 										</div>
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b4c1">നാസിം തഅലിമിൻറെ പേര്</label>
-												<input type="text" name="b4c1" class="form-control" id="b4c1" <?php if(isset($b4c1)) echo 'value='.$b4c1;?>>
+												<input type="text" name="b4c1" class="form-control" id="b4c1" <?php if(isset($b4c1)) echo 'value="'.$b4c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b4c2">തഅലിം ക്ലാസ് നടത്തിയോ?</label>
@@ -549,7 +593,7 @@ if(isset($_SESSION["user_name"]))
 												<input type="text" name="b4c21" class="form-control ignore" id="b4c21" <?php if(isset($b4c21)) echo 'value='.$b4c21;?>>
 											</div>											
 											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next">Next</button>
+											<button type="button" class="btn btn-next" onclick="Block4(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
 									</fieldset>	
 									<!------------------ BLOCK 4 End ------------------------->										
@@ -558,21 +602,21 @@ if(isset($_SESSION["user_name"]))
 									<fieldset id="f5">
 										<div class="form-top">
 											<div class="form-top-left">
-												<h3>ശുഅബ തർബിയ്യത് </h3>
+												<h3>5. ശുഅബ തർബിയ്യത് </h3>
 											</div>
 										</div>
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b5c1">നാസിം തർബിയ്യത്തിൻറെ പേര്</label>
-												<input type="text" name="b5c1" class="form-control" id="b5c1" <?php if(isset($b5c1)) echo 'value='.$b5c1;?>>
+												<input type="text" name="b5c1" class="form-control" id="b5c1" <?php if(isset($b5c1)) echo 'value="'.$b5c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c2">ഈ മാസം എത്ര തർബിയ്യത് യോഗം സംഘടിപ്പിച്ചു?</label>
-												<input type="text" name="b5c2" class="form-control ignore" id="b5c2">
+												<input type="text" name="b5c2" class="form-control ignore" id="b5c2" <?php if(isset($b5c2)) echo 'value='.$b5c2;?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c3">ഹാജരായ ഖുദാമുകളുടെ എണ്ണം</label>
-												<input type="text" name="b5c3" class="form-control ignore" id="b5c3">
+												<input type="text" name="b5c3" class="form-control ignore" id="b5c3" <?php if(isset($b5c3)) echo 'value='.$b5c3;?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c4">ഈ മാസം അഞ്ചു നേര നമസ്കാരം നിർവഹിച്ച ഖുദാമുകളുടെ എണ്ണം</label>
@@ -581,21 +625,21 @@ if(isset($_SESSION["user_name"]))
 											<div class="form-group">
 												<label for="b5c5">ഈ മാസം തഹജ്ജുദ് നമസ്കാരം നടത്തിയോ?</label>
 												<select id="b5c5" name="b5c5" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b5c5) && $b5c5 == 'No') echo 'selected';?> value="No">No</option>
+													<option  <?php if(isset($b5c5) && $b5c5 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>
 											<div class="form-group">
 												<label for="b5c6">ഹാജരായ ഖുദാമുകളുടെ എണ്ണം</label>
-												<input type="text" name="b5c6" class="form-control ignore" id="b5c6">
+												<input type="text" name="b5c6" class="form-control ignore" id="b5c6" <?php if(isset($b5c6)) echo 'value='.$b5c6;?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c7">ഈ മാസം എത്ര ഖുദാമുകൾക് വ്യക്തിപരമായി തർബിയ്യത്തിൻറെ കണക്കെടുത്തു, എണ്ണം?</label>
-												<input type="text" name="b5c7" class="form-control ignore" id="b5c7">
+												<input type="text" name="b5c7" class="form-control ignore" id="b5c7" <?php if(isset($b5c7)) echo 'value='.$b5c7;?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c8">ഈ മാസം തഹജ്ജുദ് നമസ്കാരം നിർവഹിച്ചവരുടെ എണ്ണം</label>
-												<input type="text" name="b5c8" class="form-control ignore" id="b5c8">
+												<input type="text" name="b5c8" class="form-control ignore" id="b5c8" <?php if(isset($b5c8)) echo 'value='.$b5c8;?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c9">നിസാമെ വസിയ്യത്തിൽ ഉൾപ്പെട്ട ഖാദിമീങ്ങളുടെ എണ്ണം</label>
@@ -607,37 +651,37 @@ if(isset($_SESSION["user_name"]))
 											</div>
 											<div class="form-group">
 												<label for="b5c11">ഈ മാസം എത്ര ഖുദ്‌ദാമിനെ വസിയ്യത് പദ്ധതിയിൽ ഉൾപ്പെടുത്തി?</label>
-												<input type="text" name="b5c11" class="form-control ignore" id="b5c11">
+												<input type="text" name="b5c11" class="form-control ignore" id="b5c11" <?php if(isset($b5c11)) echo 'value='.$b5c11;?>>
 											</div>		
 											<div class="form-group">
 												<label for="b5c12">ഈ മാസം തർബിയ്യത് വിഷയങ്ങളിൽ പാംഫ്ലെറ് ഇറക്കിയോ?</label>
 												<select id="b5c12" name="b5c12" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b5c12) && $b5c12 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b5c12) && $b5c12 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>
 											<div class="form-group">
 												<label for="b5c13">ഇറക്കിയ പാംഫ്ലേറ്റിന്റെ കോപ്പി ചേർത്തോ?</label>
 												<select id="b5c13" name="b5c13" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b5c13) && $b5c13 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b5c13) && $b5c13 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>
 											<div class="form-group">
 												<label for="b5c14">ഈ മാസം ഹുസൂറിന് കത്തയച്ച ഖുദാമുകളുടെ എണ്ണം</label>
-												<input type="text" name="b5c14" class="form-control ignore" id="b5c14">
+												<input type="text" name="b5c14" class="form-control ignore" id="b5c14" <?php if(isset($b5c14)) echo 'value='.$b5c14;?>>
 											</div>	
 											<div class="form-group">
 												<label for="b5c15">ഹുസൂരിന്റെ ഖുതുബ സ്ഥിരമായി കേൾക്കുന്ന ഖുദാമുകളുടെ എണ്ണം</label>
-												<input type="text" name="b5c15" class="form-control ignore" id="b5c15">
+												<input type="text" name="b5c15" class="form-control ignore" id="b5c15" <?php if(isset($b5c15)) echo 'value='.$b5c15;?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c16">വഖഫ് ആർസിയിൽ പങ്കെടുത്ത ഖുദാമുകളുടെ എണ്ണം</label>
-												<input type="text" name="b5c16" class="form-control ignore" id="b5c16">
+												<input type="text" name="b5c16" class="form-control ignore" id="b5c16" <?php if(isset($b5c16)) echo 'value='.$b5c16;?>>
 											</div>											
 											
 											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next">Next</button>
+											<button type="button" class="btn btn-next" onclick="Block5(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 5 End ------------------------->
@@ -646,13 +690,13 @@ if(isset($_SESSION["user_name"]))
 									<fieldset id="f6">
 										<div class="form-top">
 											<div class="form-top-left">
-												<h3>ശുഅബ തബ്‌ലീഗ് </h3>
+												<h3>6. ശുഅബ തബ്‌ലീഗ് </h3>
 											</div>
 										</div>
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b6c1">നാസിം തബ്‌ലീഗിൻ്റെ പേര്</label>
-												<input type="text" name="b6c1" class="form-control" id="b6c1" <?php if(isset($b6c1)) echo 'value='.$b6c1;?>>
+												<input type="text" name="b6c1" class="form-control" id="b6c1" <?php if(isset($b6c1)) echo 'value="'.$b6c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<table border="1" width="90%">
@@ -663,101 +707,101 @@ if(isset($_SESSION["user_name"]))
 													</tr>
 													<tr>
 														<td>സോഷ്യൽ മീഡിയ</td>
-														<td><input type="text" name="b6c2" class="form-control ignore" id="b6c2"></td>
-														<td><input type="text" name="b6c8" class="form-control ignore" id="b6c8"></td>
+														<td><input type="text" name="b6c2" class="form-control ignore" id="b6c2" <?php if(isset($b6c2)) echo 'value='.$b6c2;?>></td>
+														<td><input type="text" name="b6c8" class="form-control ignore" id="b6c8" <?php if(isset($b6c8)) echo 'value='.$b6c8;?>></td>
 													</tr>
 													<tr>
 														<td>ചോദ്യോത്തര സദസ്സ് (മജ്‌ലിസ് )</td>														
-														<td><input type="text" name="b6c3" class="form-control ignore" id="b6c3"></td>
-														<td><input type="text" name="b6c9" class="form-control ignore" id="b6c9"></td>
+														<td><input type="text" name="b6c3" class="form-control ignore" id="b6c3" <?php if(isset($b6c3)) echo 'value='.$b6c3;?>></td>
+														<td><input type="text" name="b6c9" class="form-control ignore" id="b6c9" <?php if(isset($b6c9)) echo 'value='.$b6c9;?>></td>
 													</tr>													
 													<tr>
 														<td>ലിറ്ററേച്ചർ/ ലീഫ് ലെറ്റ് വിതരണം</td>														
-														<td><input type="text" name="b6c4" class="form-control ignore" id="b6c4"></td>
-														<td><input type="text" name="b6c10" class="form-control ignore" id="b6c10"></td>
+														<td><input type="text" name="b6c4" class="form-control ignore" id="b6c4" <?php if(isset($b6c4)) echo 'value='.$b6c4;?>></td>
+														<td><input type="text" name="b6c10" class="form-control ignore" id="b6c10" <?php if(isset($b6c10)) echo 'value='.$b6c10;?>></td>
 													</tr>																										
 													<tr>
 														<td>ബുക്ക് സ്റ്റാൾ</td>														
-														<td><input type="text" name="b6c5" class="form-control ignore" id="b6c5"></td>
-														<td><input type="text" name="b6c11" class="form-control ignore" id="b6c11"></td>
+														<td><input type="text" name="b6c5" class="form-control ignore" id="b6c5" <?php if(isset($b6c5)) echo 'value='.$b6c5;?>></td>
+														<td><input type="text" name="b6c11" class="form-control ignore" id="b6c11" <?php if(isset($b6c11)) echo 'value='.$b6c11;?>></td>
 													</tr>
 													<tr>
 														<td>തബ്ലീഗ് യോഗങ്ങൾ</td>														
-														<td><input type="text" name="b6c6" class="form-control ignore" id="b6c6"></td>
-														<td><input type="text" name="b6c12" class="form-control ignore" id="b6c12"></td>
+														<td><input type="text" name="b6c6" class="form-control ignore" id="b6c6" <?php if(isset($b6c6)) echo 'value='.$b6c6;?>></td>
+														<td><input type="text" name="b6c12" class="form-control ignore" id="b6c12" <?php if(isset($b6c12)) echo 'value='.$b6c12;?>></td>
 													</tr>													
 													<tr>
 														<td>MTA</td>														
-														<td><input type="text" name="b6c7" class="form-control ignore" id="b6c7"></td>
-														<td><input type="text" name="b6c13" class="form-control ignore" id="b6c13"></td>
+														<td><input type="text" name="b6c7" class="form-control ignore" id="b6c7" <?php if(isset($b6c7)) echo 'value='.$b6c7;?>></td>
+														<td><input type="text" name="b6c13" class="form-control ignore" id="b6c13" <?php if(isset($b6c13)) echo 'value='.$b6c13;?>></td>
 													</tr>																										
 												</table>
 											</div>
 											<div class="form-group">
 												<label for="b6c14">ഈ മാസം 10 ദിന തബ്‌ലീഗിൻ്റെ കീഴിൽ പ്രോഗ്രാം നടത്തിയോ?</label>
 												<select id="b6c14" name="b6c14" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b6c14) && $b6c14 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b6c14) && $b6c14 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>											
 											<div class="form-group">
 												<label for="b6c15">എത്ര പേർ പങ്കെടുത്തു?</label>
-												<input type="text" name="b6c15" class="form-control ignore" id="b6c15">
+												<input type="text" name="b6c15" class="form-control ignore" id="b6c15" <?php if(isset($b6c15)) echo 'value='.$b6c15;?>>
 											</div>
 											<div class="form-group">
 												<label for="b6c16">പങ്കെടുത്ത ഖുദാമുകളുടെ പട്ടിക ചേർത്തിട്ടുണ്ടോ?</label>
 												<select id="b6c16" name="b6c16" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b6c16) && $b6c16 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b6c16) && $b6c16 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>
 											<div class="form-group">
 												<label for="b6c17">ഈ മാസം ദാഈൻ  ഖുദാമിന് തബ്‌ലീഗ് ക്ലാസ് സംഘടിപ്പിച്ചോ?</label>
 												<select id="b6c17" name="b6c17" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b6c17) && $b6c17 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b6c17) && $b6c17 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>											
 											<div class="form-group">
 												<label for="b6c18">Date</label>
-												<input type="text" name="b6c18" class="form-control ignore" id="b6c18">
+												<input type="text" name="b6c18" class="form-control ignore" id="b6c18" <?php if(isset($b6c18)) echo 'value='.$b6c18;?>>
 											</div>
 											<div class="form-group">
 												<label for="b6c19">എത്ര പേർ പങ്കെടുത്തു?</label>
-												<input type="text" name="b6c19" class="form-control ignore" id="b6c19">
+												<input type="text" name="b6c19" class="form-control ignore" id="b6c19" <?php if(isset($b6c19)) echo 'value='.$b6c19;?>>
 											</div>											
 											<div class="form-group">
 												<label for="b6c20">ഓരോ 6 മാസത്തിലും തബ്‌ലീഗ് വാരം സംഘടിപ്പിച്ചോ?</label>
 												<select id="b6c20" name="b6c20" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b6c18) && $b6c18 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b6c18) && $b6c18 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>
 											<div class="form-group">
 												<label for="b6c21">എണ്ണം</label>
-												<input type="text" name="b6c21" class="form-control ignore" id="b6c21">
+												<input type="text" name="b6c21" class="form-control ignore" id="b6c21" <?php if(isset($b6c21)) echo 'value='.$b6c21;?>>
 											</div>																						
 											<div class="form-group">
 												<label for="b6c22">Date</label>
-												<input type="text" name="b6c22" class="form-control ignore" id="b6c22">
+												<input type="text" name="b6c22" class="form-control ignore" id="b6c22" <?php if(isset($b6c22)) echo 'value='.$b6c22;?>>
 											</div>											
 											<div class="form-group">
 												<label for="b6c23">പ്രത്യേക ദാഈൻ ഖുദാമുകളുടെ എണ്ണം</label>
-												<input type="text" name="b6c23" class="form-control ignore" id="b6c23">
+												<input type="text" name="b6c23" class="form-control ignore" id="b6c23" <?php if(isset($b6c23)) echo 'value='.$b6c23;?>>
 											</div>																																	
 											<div class="form-group">
 												<label for="b6c24">ഈ മാസം എത്ര ബയ്യത്തുകൾ ചെയ്യിപ്പിച്ചു?</label>
-												<input type="text" name="b6c24" class="form-control ignore" id="b6c24">
+												<input type="text" name="b6c24" class="form-control ignore" id="b6c24" <?php if(isset($b6c24)) echo 'value='.$b6c24;?>>
 											</div>
 											<div class="form-group">
 												<label for="b6c25">ബയ്യത് ഫോറം കോപ്പി കൂടെ ചേർത്തിട്ടുണ്ടോ?</label>
 												<select id="b6c25" name="b6c25" class="form-control">
-													<option value="No">No</option>
-													<option value="Yes">Yes</option>
+													<option <?php if(isset($b6c25) && $b6c25 == 'No') echo 'selected';?> value="No">No</option>
+													<option <?php if(isset($b6c25) && $b6c25 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>											
 											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next">Next</button>
+											<button type="button" class="btn btn-next" onclick="Block6(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 6 End ------------------------->									
@@ -775,6 +819,8 @@ if(isset($_SESSION["user_name"]))
 			<script src="assets/js/jquery.backstretch.min.js"></script>
 			<script src="assets/js/retina-1.1.0.min.js"></script>
 			<script src="assets/js/scripts.js"></script>
+			<script src="assets/js/blockFunctions.js"></script>
+			<script src="assets/js/saveFunctions.js"></script>
 			<script>
 				$( document ).ready(function() {
 					var status = "<?php echo $report['status'] ?>";
@@ -810,88 +856,6 @@ if(isset($_SESSION["user_name"]))
 					var b6c22 = { dateFormat:"dd-mm-yy"};
 					$( "#b6c22" ).datepicker(b6c22);										
 				});
-				
-				function Block1(){
-				  var c1 = $("input#b1c1").val();
-				  var c2 = $("input#b1c2").val();
-				  var c3 = $("input#b1c3").val();
-				  var c4 = $("input#b1c4").val();
-				  var c5 = $("input#b1c5").val();
-				  var c6 = $("input#b1c6").val();
-				  var c7 = $("input#b1c7").val();
-				  var c8 = $("input#b1c8").val();
-				  var c9 = $("input#b1c9").val();
-				  var c10 = $("select#b1c10").val();
-				  var c11 = $("input#b1c11").val();
-				  var c12 = $("input#b1c12").val();
-				  var c13 = $("input#b1c13").val();
-				  var c14 = $("input#b1c14").val();
-				  
-				  
-				  var dataArray = {
-					"c1":c1,
-					"c2":c2,
-					"c3":c3,
-					"c4":c4,
-					"c5":c5,
-					"c6":c6,
-					"c7":c7,
-					"c8":c8,
-					"c9":c9,
-					"c10":c10,
-					"c11":c11,
-					"c12":c12,
-					"c13":c13,
-					"c14":c14
-				  };
-				 
-				  jQuery.ajax({
-					type: "POST",
-					url: "process.php",
-					data: {block1 : JSON.stringify(dataArray)},
-					cache: false,
-					success: function(response){
-					  console.log(response);
-					}
-				  });
-				}
-				
-				function Block2(){
-				  var c1 = $("input#b2c1").val();
-				  var c2 = $("input#b2c2").val();
-				  var c3 = $("select#b2c3").val();
-				  var c4 = $("select#b2c4").val();
-				  var c5 = $("select#b2c5").val();
-				  var c6 = $("select#b2c6").val();
-				  var c7 = $("input#b2c7").val();
-				  var c8 = $("select#b2c8").val();
-				  var year = "<?php echo $year ?>";
-				  var month = "<?php echo $month ?>";
-				  
-				  var dataArray = {
-					"c1":c1,
-					"c2":c2,
-					"c3":c3,
-					"c4":c4,
-					"c5":c5,
-					"c6":c6,
-					"c7":c7,
-					"c8":c8,
-					"year":year,
-					"month":month
-				  };
-				 
-				  jQuery.ajax({
-					type: "POST",
-					url: "process.php",
-					data: {block2 : JSON.stringify(dataArray)},
-					cache: false,
-					success: function(response){
-					  console.log(response);
-					}
-				  });
-				}				
-
 			</script>
 		</body>
 	</html>
