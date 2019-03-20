@@ -38,7 +38,8 @@ function Block1(){
 	data: {block1 : JSON.stringify(dataArray)},
 	cache: false,
 	success: function(response){
-	  console.log(response);
+		if (response)
+			alert(response);
 	}
   });
 }

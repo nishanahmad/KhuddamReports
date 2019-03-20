@@ -155,8 +155,7 @@ if(isset($_SESSION["user_name"]))
 					{
 						if($reportMap[$i]['percentage'] < 100)
 						{																													?>
-							<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:140px;">Continue  <i class="fas fa-pen"></i></a>
-							<a href="pdf/generate.php?id=<?php echo $report['id'];?>" class="btn btn-success" style="width:140px;">View PDF  <i class="far fa-file-pdf"></i></a>				<?php							
+							<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:140px;">Continue  <i class="fas fa-pen"></i></a><?php							
 						}
 						else
 						{																													?>

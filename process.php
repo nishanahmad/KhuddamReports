@@ -31,20 +31,49 @@ if(isset($_SESSION["user_name"]))
 		$b1c13 = $block1["c13"];
 		$b1c14 = $block1["c14"];
 
-		$query="INSERT INTO reports (jamath,year,month,created_on,status)
-			 VALUES
-			 ('$jamath','$b1c11','$b1c10','$created_on',1)";
-		$report = mysqli_query($con, $query);
-		if($report)
+		$search = mysqli_query($con, "SELECT * FROM reports WHERE jamath=$jamath AND year=$b1c11 AND month=$b1c10");
+		if(mysqli_num_rows($search) <=0)
 		{
-			$reportId = $con->insert_id;		
-			$query1="INSERT INTO block1 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14)
+			$query="INSERT INTO reports (jamath,year,month,created_on,status)
 				 VALUES
-				 ($reportId,'$b1c1','$b1c2','$b1c3','$b1c4','$b1c5','$b1c6','$b1c7','$b1c8','$b1c9','$b1c10','$b1c11','$b1c12','$b1c13','$b1c14')";
+				 ('$jamath','$b1c11','$b1c10','$created_on',1)";
+			$report = mysqli_query($con, $query);			
+			if($report)
+				$reportId = $con->insert_id;
+		}
+		else
+		{
+			$report = mysqli_fetch_Array($search,MYSQLI_ASSOC);
+			$reportId = $report['id'];
+		}
 
-			$insert1 = mysqli_query($con, $query1);	
-			if(!$insert1)
-				$error =  mysqli_error($con);
+		if(isset($reportId))
+		{
+			$search1 = 	mysqli_query($con, "SELECT * FROM block1 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search1) <=0)
+			{
+				$query1="INSERT INTO block1 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14)
+					 VALUES
+					 ($reportId,'$b1c1','$b1c2','$b1c3','$b1c4','$b1c5','$b1c6','$b1c7','$b1c8','$b1c9','$b1c10','$b1c11','$b1c12','$b1c13','$b1c14')";
+
+				$insert1 = mysqli_query($con, $query1);	
+				if(!$insert1)
+					$error =  mysqli_error($con);				
+			}
+			else
+			{				
+				$query1="UPDATE block1 SET report_id='$reportId',c1='$b1c1',c2='$b1c2',c3='$b1c3',c4='$b1c4',c5='$b1c5',
+						 c6='$b1c6',c7='$b1c7',c8='$b1c8',c9='$b1c9',c10='$b1c10',c11='$b1c11',c12='$b1c12',
+						 c13='$b1c13',c14='$b1c14'";
+
+			$fp = fopen('results.json', 'w');
+			fwrite($fp, json_encode($query1));
+			fclose($fp);			
+
+				$update1 = mysqli_query($con, $query1);	
+				if(!$update1)
+					$error =  mysqli_error($con);				
+			}	
 		}
 		else
 		{
@@ -87,20 +116,34 @@ if(isset($_SESSION["user_name"]))
 				$b2c7 = null;
 			$b2c8 = $block2["c8"];			
 			
-			$query2="INSERT INTO block2 (report_id,c1,c2,c3,c4,c5,c6,c7,c8)
-				 VALUES
-				 ($reportId,'$b2c1',".var_export($b2c2, true).",'$b2c3','$b2c4','$b2c5','$b2c6',".var_export($b2c7, true).",'$b2c8')";
+			$search2 = mysqli_query($con, "SELECT * FROM block2 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search2) <=0)
+			{
+				$query2="INSERT INTO block2 (report_id,c1,c2,c3,c4,c5,c6,c7,c8)
+					 VALUES
+					 ($reportId,'$b2c1',".var_export($b2c2, true).",'$b2c3','$b2c4','$b2c5','$b2c6',".var_export($b2c7, true).",'$b2c8')";
 
-			$insert2 = mysqli_query($con, $query2);	
-			if(!$insert2)
-				$error =  mysqli_error($con);
+				$insert2 = mysqli_query($con, $query2);	
+				if(!$insert2)
+					$error =  mysqli_error($con);
+				else
+				{
+					$updateStatus = mysqli_query($con,"UPDATE reports SET status=2 WHERE id='$reportId'");
+					if(!$updateStatus)
+						$error =  mysqli_error($con);
+						
+				}				
+			}
 			else
 			{
-				$updateStatus = mysqli_query($con,"UPDATE reports SET status=2 WHERE id='$reportId'");
-				if(!$updateStatus)
-					$error =  mysqli_error($con);
-					
+				$query2="UPDATE block2 SET report_id='$reportId',c1='$b2c1',c2=".var_export($b2c2, true).",c3='$b2c3',c4='$b2c4',
+						c5='$b2c5',c6='$b2c6',c7=".var_export($b2c7, true).",c8='$b2c8'";
+
+				$update2 = mysqli_query($con, $query1);	
+				if(!$update2)
+					$error =  mysqli_error($con);				
 			}
+
 		}
 		else
 		{
