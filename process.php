@@ -58,13 +58,13 @@ if(isset($_SESSION["user_name"]))
 
 				$insert1 = mysqli_query($con, $query1);	
 				if(!$insert1)
-					$error =  mysqli_error($con);				
+					$error =  mysqli_error($con).'Line 61';				
 			}
 			else
 			{				
-				$query1="UPDATE block1 SET report_id='$reportId',c1='$b1c1',c2='$b1c2',c3='$b1c3',c4='$b1c4',c5='$b1c5',
+				$query1="UPDATE block1 SET c1='$b1c1',c2='$b1c2',c3='$b1c3',c4='$b1c4',c5='$b1c5',
 						 c6='$b1c6',c7='$b1c7',c8='$b1c8',c9='$b1c9',c10='$b1c10',c11='$b1c11',c12='$b1c12',
-						 c13='$b1c13',c14='$b1c14'";
+						 c13='$b1c13',c14='$b1c14' WHERE reportId=$reportId";
 
 			$fp = fopen('results.json', 'w');
 			fwrite($fp, json_encode($query1));
@@ -72,12 +72,12 @@ if(isset($_SESSION["user_name"]))
 
 				$update1 = mysqli_query($con, $query1);	
 				if(!$update1)
-					$error =  mysqli_error($con);				
+					$error =  mysqli_error($con).'Line 75';							
 			}	
 		}
 		else
 		{
-			$error = mysqli_error($con);
+			$error = mysqli_error($con).'Line 80';				
 		}
 		
 		if($error == null)
@@ -125,29 +125,29 @@ if(isset($_SESSION["user_name"]))
 
 				$insert2 = mysqli_query($con, $query2);	
 				if(!$insert2)
-					$error =  mysqli_error($con);
+					$error =  mysqli_error($con).'Line 128';				
 				else
 				{
 					$updateStatus = mysqli_query($con,"UPDATE reports SET status=2 WHERE id='$reportId'");
 					if(!$updateStatus)
-						$error =  mysqli_error($con);
+						$error =  mysqli_error($con).'Line 133';				
 						
 				}				
 			}
 			else
 			{
-				$query2="UPDATE block2 SET report_id='$reportId',c1='$b2c1',c2=".var_export($b2c2, true).",c3='$b2c3',c4='$b2c4',
-						c5='$b2c5',c6='$b2c6',c7=".var_export($b2c7, true).",c8='$b2c8'";
+				$query2="UPDATE block2 SET c1='$b2c1',c2=".var_export($b2c2, true).",c3='$b2c3',c4='$b2c4',
+						c5='$b2c5',c6='$b2c6',c7=".var_export($b2c7, true).",c8='$b2c8' WHERE report_id=$reportId";
 
 				$update2 = mysqli_query($con, $query2);	
 				if(!$update2)
-					$error =  mysqli_error($con);				
+					$error =  mysqli_error($con).'Line 144';								
 			}
 
 		}
 		else
 		{
-			$error = mysqli_error($con);
+			$error = mysqli_error($con).'Line 150';				
 		}
 		
 		echo $error;
@@ -176,19 +176,32 @@ if(isset($_SESSION["user_name"]))
 			$b3c5 = $block3["c5"];
 			$b3c6 = $block3["c6"];
 			
-			$query3="INSERT INTO block3 (report_id,c1,c2,c3,c4,c5,c6)
-				 VALUES
-				 ($reportId,'$b3c1','$b3c2',".var_export($b3c3, true).",'$b3c4','$b3c5','$b3c6')";
+			$search2 = mysqli_query($con, "SELECT * FROM block2 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search2) <=0)
+			{
+				$query3="INSERT INTO block3 (report_id,c1,c2,c3,c4,c5,c6)
+					 VALUES
+					 ($reportId,'$b3c1','$b3c2',".var_export($b3c3, true).",'$b3c4','$b3c5','$b3c6')";
 
-			$insert3 = mysqli_query($con, $query3);	
-			if(!$insert3)
-				$error =  mysqli_error($con);
+				$insert3 = mysqli_query($con, $query3);	
+				if(!$insert3)
+					$error =  mysqli_error($con);
+				else
+				{
+					$updateStatus = mysqli_query($con,"UPDATE reports SET status=3 WHERE id='$reportId'");
+					if(!$updateStatus)
+						$error =  mysqli_error($con);
+				}				
+			}
 			else
 			{
-				$updateStatus = mysqli_query($con,"UPDATE reports SET status=3 WHERE id='$reportId'");
-				if(!$updateStatus)
-					$error =  mysqli_error($con);
-			}
+				$query3="UPDATE block3 SET report_id='$reportId',c1='$b3c1',c2=".var_export($b3c2, true).",c3='$b3c3',c4='$b3c4',
+						c5='$b3c5',c6='$b3c6'";
+
+				$update3 = mysqli_query($con, $query3);	
+				if(!$update3)
+					$error =  mysqli_error($con);				
+			}			
 		}
 		else
 		{

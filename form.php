@@ -448,7 +448,6 @@ if(isset($_SESSION["user_name"]))
 											</div>																																	
 											<button type="button" class="btn btn-previous">Previous</button>
 											<button type="button" class="btn btn-next" onclick="Block2(<?php echo $year.','.$month;?>)">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save2()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 2 End ------------------------->	
@@ -496,7 +495,6 @@ if(isset($_SESSION["user_name"]))
 											
 											<button type="button" class="btn btn-previous">Previous</button>
 											<button type="button" class="btn btn-next" onclick="Block3(<?php echo $year.','.$month;?>)">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save3()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 3 End ------------------------->	
@@ -596,7 +594,6 @@ if(isset($_SESSION["user_name"]))
 											</div>											
 											<button type="button" class="btn btn-previous">Previous</button>
 											<button type="button" class="btn btn-next" onclick="Block4(<?php echo $year.','.$month;?>)">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save4()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>	
 									<!------------------ BLOCK 4 End ------------------------->										
@@ -685,7 +682,6 @@ if(isset($_SESSION["user_name"]))
 											
 											<button type="button" class="btn btn-previous">Previous</button>
 											<button type="button" class="btn btn-next" onclick="Block5(<?php echo $year.','.$month;?>)">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save5()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 5 End ------------------------->
@@ -806,7 +802,6 @@ if(isset($_SESSION["user_name"]))
 											</div>											
 											<button type="button" class="btn btn-previous">Previous</button>
 											<button type="button" class="btn btn-next" onclick="Block6(<?php echo $year.','.$month;?>)">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save6()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 6 End ------------------------->									
