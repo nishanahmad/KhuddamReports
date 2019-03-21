@@ -382,7 +382,6 @@ if(isset($_SESSION["user_name"]))
 												<input type="text" name="b1c14" class="form-control" id="b1c14" <?php if(isset($b1c14)) echo 'value='.$b1c14;?>>
 											</div>										
 											<button type="button" class="btn btn-next" onClick="Block1()">Next</button>
-											
 											<button style="float:right" class="btn btn-success" onClick="Save1()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
@@ -448,6 +447,7 @@ if(isset($_SESSION["user_name"]))
 											</div>																																	
 											<button type="button" class="btn btn-previous">Previous</button>
 											<button type="button" class="btn btn-next" onclick="Block2(<?php echo $year.','.$month;?>)">Next</button>
+											<button style="float:right" class="btn btn-success" onClick="Save2()">Save & Exit  <i class="fas fa-save"></i></button>
 										</div>
 									</fieldset>
 									<!------------------ BLOCK 2 End ------------------------->	

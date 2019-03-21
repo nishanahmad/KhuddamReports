@@ -312,20 +312,36 @@ if(isset($_SESSION["user_name"]))
 			$b5c15 = $block5["c15"];
 			$b5c16 = $block5["c16"];
 			
-			$query4="INSERT INTO block5 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16)
-				 VALUES
-				 ($reportId,'$b5c1','$b5c2','$b5c3','$b5c4','$b5c5','$b5c6','$b5c7','$b5c8','$b5c9','$b5c10',
-				 '$b5c11','$b5c12','$b5c13','$b5c14','$b5c15','$b5c16')";
+			$search5 = mysqli_query($con, "SELECT * FROM block5 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search5) <=0)		
+			{
+				$query5="INSERT INTO block5 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16)
+					 VALUES
+					 ($reportId,'$b5c1','$b5c2','$b5c3','$b5c4','$b5c5','$b5c6','$b5c7','$b5c8','$b5c9','$b5c10',
+					 '$b5c11','$b5c12','$b5c13','$b5c14','$b5c15','$b5c16')";
 
-			$insert5 = mysqli_query($con, $query5);	
-			if(!$insert5)
-				$error =  mysqli_error($con);
+				$insert5 = mysqli_query($con, $query5);	
+				if(!$insert5)
+					$error =  mysqli_error($con);
+				else
+				{
+					$updateStatus = mysqli_query($con,"UPDATE reports SET status=5 WHERE id='$reportId'");
+					if(!$updateStatus)
+						$error =  mysqli_error($con);
+				}				
+			}
 			else
 			{
-				$updateStatus = mysqli_query($con,"UPDATE reports SET status=5 WHERE id='$reportId'");
-				if(!$updateStatus)
-					$error =  mysqli_error($con);
+				$query5="UPDATE block5 SET c1='$b5c1',c2='$b5c2',c3='$b5c3',c4='$b5c4',
+						c5='$b5c5',c6='$b5c6',c7='$b5c7',c8='$b5c8',c9='$b5c9',c10='$b5c10',c11='$b5c11',c12='$b5c12',
+						c13='$b5c13',c14='$b5c14',c15='$b5c15',c16='$b5c16'
+						WHERE report_id=$reportId";
+
+				$update5 = mysqli_query($con, $query5);	
+				if(!$update5)
+					$error =  mysqli_error($con);												
 			}
+
 		}
 		else
 		{
@@ -380,21 +396,37 @@ if(isset($_SESSION["user_name"]))
 			$b6c24 = $block6["c24"];
 			$b6c25 = $block6["c25"];
 			
-			$query6="INSERT INTO block6 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21)
-				 VALUES
-				 ($reportId,'$b6c1','$b6c2','$b6c3','$b6c4','$b6c5','$b6c6','$b6c7','$b6c8','$b6c9','$b6c10','$b6c11','$b6c12','$b6c13',
-				 '$b6c14','$b6c15','$b6c16','$b6c17',".var_export($b6c18, true).",'$b6c19','$b6c20','$b6c21',".var_export($b6c22, true).",
-				 '$b6c23','$b6c24','$b6c25')";
+			$search6 = mysqli_query($con, "SELECT * FROM block6 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search6) <=0)
+			{
+				$query6="INSERT INTO block6 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21)
+					 VALUES
+					 ($reportId,'$b6c1','$b6c2','$b6c3','$b6c4','$b6c5','$b6c6','$b6c7','$b6c8','$b6c9','$b6c10','$b6c11','$b6c12','$b6c13',
+					 '$b6c14','$b6c15','$b6c16','$b6c17',".var_export($b6c18, true).",'$b6c19','$b6c20','$b6c21',".var_export($b6c22, true).",
+					 '$b6c23','$b6c24','$b6c25')";
 
-			$insert6 = mysqli_query($con, $query6);	
-			if(!$insert6)
-				$error =  mysqli_error($con);
+				$insert6 = mysqli_query($con, $query6);	
+				if(!$insert6)
+					$error =  mysqli_error($con);
+				else
+				{
+					$updateStatus = mysqli_query($con,"UPDATE reports SET status=6 WHERE id='$reportId'");
+					if(!$updateStatus)
+						$error =  mysqli_error($con);
+				}				
+			}
 			else
 			{
-				$updateStatus = mysqli_query($con,"UPDATE reports SET status=6 WHERE id='$reportId'");
-				if(!$updateStatus)
-					$error =  mysqli_error($con);
+				$query6="UPDATE block6 SET c1='$b6c1',c2='$b6c2',c3='$b6c3',c4='$b6c4',
+						c5='$b6c5',c6='$b6c6',c7='$b6c7',c8='$b6c8',c9='$b6c9',c10='$b6c10',c11='$b6c11',c12='$b6c12',c13='$b6c13',
+						c14='$b6c14',c15='$b6c15',c16='$b6c16',c16='$b6c17',c16='$b6c18',c16='$b6c19',c16='$b6c20',c21='$b6c21'
+						WHERE report_id=$reportId";
+
+				$update6 = mysqli_query($con, $query6);	
+				if(!$update6)
+					$error =  mysqli_error($con);																
 			}
+
 		}
 		else
 		{

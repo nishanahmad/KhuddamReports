@@ -1,1 +1,1 @@
-"UPDATE block1 SET report_id='7',c1='5',c2='2019-03-31',c3='10',c4='2019-03-31',c5='Kannur Town',\r\n\t\t\t\t\t\t c6='Kannur',c7='Kerala',c8='25',c9='12',c10='1',c11='2019',c12='Far s',\r\n\t\t\t\t\t\t c13='dfasdf',c14='45346546'"
+"UPDATE block1 SET c1='5',c2='2019-03-20',c3='10',c4='2019-03-21',c5='Kannur Town',\r\n\t\t\t\t\t\t c6='Kannur',c7='Kerala',c8='25',c9='12',c10='2',c11='2019',c12='Far s',\r\n\t\t\t\t\t\t c13='dfasdf',c14='45346546' WHERE reportId=8"
