@@ -113,60 +113,63 @@ if(isset($_SESSION["user_name"]))
 													</select>
 												</div>
 												<br/>
-  <table class="responsive-table">
-    <caption><?php echo $jamath['name'].' '.$year;?></caption>
-    <thead>
-      <tr>
-        <th scope="col">Month</th>
-        <th scope="col">Status</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tfoot>
-    </tfoot>
-    <tbody>																		<?php
-		for($i=1;$i<=12;$i++)
-		{																		?>
-			<tr>
-				<th scope="row"><?php echo getMonth($i);?></th>
-				<td>										<?php 
-					if(isset($reportMap[$i]))
-					{
-						$percentage = $reportMap[$i]['percentage']?>
-						<div class="meter">
-						  <span style="width:<?php echo $percentage;?>%"></span>
-						  <p><?php echo $percentage;?>%</p>
-						</div><?php																	
-					}
-					else
-					{?>
-						<div class="meter">
-						  <span style="width:0%"></span>
-						  <p>0%</p>
-						</div>															<?php																																		
-					}																	?>
-				</td>
-				<td><?php 
-					if(!isset($reportMap[$i]))
-					{																									?>
-						<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-success" style="width:140px;">Create New <i class="fas fa-chevron-right"></i></a>									<?php	
-					}
-					else
-					{
-						if($reportMap[$i]['percentage'] < 100)
-						{																													?>
-							<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:140px;">Continue  <i class="fas fa-pen"></i></a><?php							
-						}
-						else
-						{																													?>
-							<a href="pdf/generate.php?id=<?php echo $report['id'];?>" class="btn btn-success" style="width:140px;">Download PDF  <i class="far fa-file-pdf"></i></a>				<?php							
-						}							
-					}																														?>	
-				</td>
-			</tr>																															<?php
-		}																																	?>			
-    </tbody>
-  </table>												
+												  <table class="responsive-table">
+													<caption><?php echo $jamath['name'].' '.$year;?></caption>
+													<thead>
+													  <tr>
+														<th scope="col">Month</th>
+														<th scope="col">Status</th>
+														<th scope="col"></th>
+													  </tr>
+													</thead>
+													<tfoot>
+													</tfoot>
+													<tbody>																		<?php
+														for($i=1;$i<=12;$i++)
+														{																		?>
+															<tr>
+																<th scope="row"><?php echo getMonth($i);?></th>
+																<td>										<?php 
+																	if(isset($reportMap[$i]))
+																	{
+																		$percentage = $reportMap[$i]['percentage']?>
+																		<div class="meter">
+																		  <span style="width:<?php echo $percentage;?>%"></span>
+																		  <p><?php echo $percentage;?>%</p>
+																		</div><?php																	
+																	}
+																	else
+																	{?>
+																		<div class="meter">
+																		  <span style="width:0%"></span>
+																		  <p>0%</p>
+																		</div>															<?php																																		
+																	}																	?>
+																</td>
+																<td><?php 
+																	if(!isset($reportMap[$i]))
+																	{																									?>
+																		<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-success" style="width:140px;">Create New <i class="fas fa-chevron-right"></i></a>									<?php	
+																	}
+																	else
+																	{
+																		if($reportMap[$i]['percentage'] < 100)
+																		{																													?>
+																			<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:40%;">Continue  <i class="fas fa-pen"></i></a>
+																			<a href="pdf/generate.php?id=<?php echo $reportMap[$i]['id'];?>" class="btn btn-danger" style="width:40%;">PDF  <i class="fas fa-file-pdf"></i></a>								<?php							
+																		}
+																		else
+																		{																													?>
+																			<a href="form.php?year=<?php echo $year.'&month='.$i;?>" class="btn btn-warning" style="width:30%;">Edit  <i class="fas fa-pen"></i></a>
+																			<a href="pdf/generate.php?id=<?php echo $reportMap[$i]['id'];?>" class="btn btn-danger" style="width:30%;">PDF  <i class="far fa-file-pdf"></i></a>
+																			<a href="email/main.php?id=<?php echo $reportMap[$i]['id'];?>" class="btn btn-info" style="width:30%;">Mail  <i class="fas fa-envelope"></i></a>							<?php							
+																		}							
+																	}																														?>	
+																</td>
+															</tr>																															<?php
+														}																																	?>			
+													</tbody>
+												  </table>												
 											</div>
 										</div>
 									</fieldset>

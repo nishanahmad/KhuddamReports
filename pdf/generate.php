@@ -8,6 +8,8 @@ require '../monthMap.php';
 
 $reportId = $_GET['id'];
 
+$reportQuery = mysqli_query($con,"SELECT * FROM reports WHERE id = $reportId") or die(mysqli_error($con));
+$report= mysqli_fetch_array($reportQuery,MYSQLI_ASSOC);	
 $block1Query = mysqli_query($con,"SELECT * FROM block1 WHERE report_id = $reportId") or die(mysqli_error($con));
 $block1= mysqli_fetch_array($block1Query,MYSQLI_ASSOC);	
 $block2Query = mysqli_query($con,"SELECT * FROM block2 WHERE report_id = $reportId") or die(mysqli_error($con));
@@ -19,7 +21,9 @@ $block4= mysqli_fetch_array($block4Query,MYSQLI_ASSOC);
 $block5Query = mysqli_query($con,"SELECT * FROM block5 WHERE report_id = $reportId") or die(mysqli_error($con));
 $block5= mysqli_fetch_array($block5Query,MYSQLI_ASSOC);
 $block6Query = mysqli_query($con,"SELECT * FROM block6 WHERE report_id = $reportId") or die(mysqli_error($con));
-$block6= mysqli_fetch_array($block6Query,MYSQLI_ASSOC);	
+$block6= mysqli_fetch_array($block6Query,MYSQLI_ASSOC);
+$block7Query = mysqli_query($con,"SELECT * FROM block7 WHERE report_id = $reportId") or die(mysqli_error($con));
+$block7= mysqli_fetch_array($block7Query,MYSQLI_ASSOC);	
 
 // initiate FPDI
 $pdf = new Fpdi();
@@ -419,9 +423,69 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++)
 
 		$pdf->SetXY(190, 212);
 		$pdf->SetFontSize(10);
-		$pdf->Write(8, $block6['c25']);		
+		$pdf->Write(8, $block6['c25']);
+
+		//BLOCK 7
+		$pdf->SetXY(126, 241);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c1']);
+
+		$pdf->SetXY(59, 260);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c2']);
+
+		$pdf->SetXY(128, 260);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c3']);
+
+		$pdf->SetXY(192, 260);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c4']);
+
+		$pdf->SetXY(85, 269);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c5']);
+
+		$pdf->SetXY(188, 269);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c6']);
+	}	
+
+	if($pageNo == 3)
+	{	
+		$pdf->SetXY(99, 10);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c7']);		
+		
+		$pdf->SetXY(190, 10);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c8']);
+
+		$pdf->SetXY(82, 25);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c9']);
+
+		$pdf->SetXY(190, 25);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c10']);		
+		
+		$pdf->SetXY(85, 40);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c11']);		
+		
+		$pdf->SetXY(190, 40);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c12']);
+
+		$pdf->SetXY(85, 55);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c13']);
+
+		$pdf->SetXY(190, 55);
+		$pdf->SetFontSize(10);
+		$pdf->Write(8, $block7['c14']);		
 	}					
 }
 
 // Output the new PDF
-$pdf->Output();            
+$pdf->Output();  

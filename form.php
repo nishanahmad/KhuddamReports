@@ -236,6 +236,39 @@ if(isset($_SESSION["user_name"]))
 			$b6c22 = $block6['c22'];	$b6c23 = $block6['c23'];
 			$b6c24 = $block6['c24'];	$b6c25 = $block6['c25'];
 		}
+		
+		//BLOCK 7 assignment
+		$reportFlag = null;
+		if($reportId != null)
+		{
+			$block7Query = mysqli_query($con,"SELECT * FROM block7 WHERE report_id = $reportId") or die(mysqli_error($con));
+			if(mysqli_num_rows($block7Query) <=0)
+			{
+				if($oldReportId != null)
+					$block7Query = mysqli_query($con,"SELECT * FROM block7 WHERE report_id = $oldReportId") or die(mysqli_error($con));								
+			}
+			else
+				$reportFlag = 'new';
+
+		}
+		else if($oldReportId != null)
+			$block7Query = mysqli_query($con,"SELECT * FROM block7 WHERE report_id = $oldReportId") or die(mysqli_error($con));				
+			
+		$block7= mysqli_fetch_array($block7Query,MYSQLI_ASSOC);	
+		$b7c1 = $block7['c1'];		
+		$b7c2 = $block7['c2'];		
+		$b7c3 = $block7['c3'];		
+		$b7c4 = $block7['c4'];		
+		$b7c5 = $block7['c5'];		
+		$b7c6 = $block7['c6'];		
+		$b7c7 = $block7['c7'];	
+		$b7c8 = $block7['c8'];
+		$b7c9 = $block7['c9'];		
+		$b7c10 = $block7['c10'];
+		$b7c11 = $block7['c11'];
+		$b7c12 = $block7['c12'];
+		$b7c13 = $block7['c13'];
+		$b7c14 = $block7['c14'];
 	}
 ?>
 	<!DOCTYPE html>
@@ -381,10 +414,12 @@ if(isset($_SESSION["user_name"]))
 												<label for="b1c14">Mobile</label>
 												<input type="text" name="b1c14" class="form-control" id="b1c14" <?php if(isset($b1c14)) echo 'value='.$b1c14;?>>
 											</div>										
-											<button type="button" class="btn btn-next" onClick="Block1()">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save1()">Save & Exit  <i class="fas fa-save"></i></button>
+											<button type="button" class="btn btn-next btn-primary" onClick="Block1()">Next</button>
 										</div>
+										<br/>
+										<button style="float:center" class="btn btn-success" onClick="Save1()">Save & Exit  <i class="fas fa-save"></i></button>	
 									</fieldset>
+									
 									<!------------------ BLOCK 1 END ------------------------->	
 
 
@@ -399,7 +434,7 @@ if(isset($_SESSION["user_name"]))
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b2c1">മുഅതമിദിൻറെ പേര്</label>
-												<input type="text" name="b2c1" class="form-control" id="b2c1" <?php if(isset($b2c1)) echo 'value="'.$b2c1.'"'?>>
+												<input type="text" name="b2c1" class="form-control" required id="b2c1" <?php if(isset($b2c1)) echo 'value="'.$b2c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b2c2">ആമില യോഗം നടന്ന തീയതി</label>
@@ -445,10 +480,11 @@ if(isset($_SESSION["user_name"]))
 													<option <?php if(isset($b2c8) && $b2c8 == 'No') echo 'selected';?> value="No">No</option>													
 												</select>
 											</div>																																	
-											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next" onclick="Block2(<?php echo $year.','.$month;?>)">Next</button>
-											<button style="float:right" class="btn btn-success" onClick="Save2()">Save & Exit  <i class="fas fa-save"></i></button>
+											<button type="button" class="btn btn-previous btn-primary">Previous</button>
+											<button type="button" class="btn btn-next btn-primary" onclick="Block2(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
+										<br/>
+										<button style="float:center" class="btn btn-next btn-success" onClick="Save2(<?php echo $year.','.$month;?>)">Save & Exit  <i class="fas fa-save"></i></button>
 									</fieldset>
 									<!------------------ BLOCK 2 End ------------------------->	
 									
@@ -464,7 +500,7 @@ if(isset($_SESSION["user_name"]))
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b3c1">നാസിം തജ്‌നീദിൻറെ പേര്</label>
-												<input type="text" name="b3c1" class="form-control" id="b3c1" <?php if(isset($b3c1)) echo 'value="'.$b3c1.'"'?>>
+												<input type="text" name="b3c1" class="form-control" required id="b3c1" <?php if(isset($b3c1)) echo 'value="'.$b3c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b3c2">തജ്‌നീദ് ഫോറം പൂരിപ്പിച് അയച്ചുവോ?</label>
@@ -493,9 +529,11 @@ if(isset($_SESSION["user_name"]))
 												<input type="text" name="b3c6" class="form-control ignore" id="b3c6" <?php if(isset($b3c6)) echo 'value='.$b3c6;?>>
 											</div>											
 											
-											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next" onclick="Block3(<?php echo $year.','.$month;?>)">Next</button>
+											<button type="button" class="btn btn-previous btn-primary">Previous</button>
+											<button type="button" class="btn btn-next btn-primary" onclick="Block3(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
+										<br/>
+										<button style="float:center" class="btn btn-success" onClick="Save3(<?php echo $year.','.$month;?>)">Save & Exit  <i class="fas fa-save"></i></button>										
 									</fieldset>
 									<!------------------ BLOCK 3 End ------------------------->	
 									
@@ -510,7 +548,7 @@ if(isset($_SESSION["user_name"]))
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b4c1">നാസിം തഅലിമിൻറെ പേര്</label>
-												<input type="text" name="b4c1" class="form-control" id="b4c1" <?php if(isset($b4c1)) echo 'value="'.$b4c1.'"'?>>
+												<input type="text" name="b4c1" class="form-control" required id="b4c1" <?php if(isset($b4c1)) echo 'value="'.$b4c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b4c2">തഅലിം ക്ലാസ് നടത്തിയോ?</label>
@@ -592,9 +630,11 @@ if(isset($_SESSION["user_name"]))
 												<label for="b4c21">യോഗങ്ങളുടെ എണ്ണം</label>
 												<input type="text" name="b4c21" class="form-control ignore" id="b4c21" <?php if(isset($b4c21)) echo 'value='.$b4c21;?>>
 											</div>											
-											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next" onclick="Block4(<?php echo $year.','.$month;?>)">Next</button>
+											<button type="button" class="btn btn-previous btn-primary">Previous</button>
+											<button type="button" class="btn btn-next btn-primary" onclick="Block4(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
+										<br/>
+										<button style="float:center" class="btn btn-success" onClick="Save4(<?php echo $year.','.$month;?>)">Save & Exit  <i class="fas fa-save"></i></button>										
 									</fieldset>	
 									<!------------------ BLOCK 4 End ------------------------->										
 									
@@ -608,7 +648,7 @@ if(isset($_SESSION["user_name"]))
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b5c1">നാസിം തർബിയ്യത്തിൻറെ പേര്</label>
-												<input type="text" name="b5c1" class="form-control" id="b5c1" <?php if(isset($b5c1)) echo 'value="'.$b5c1.'"'?>>
+												<input type="text" name="b5c1" class="form-control" required id="b5c1" <?php if(isset($b5c1)) echo 'value="'.$b5c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<label for="b5c2">ഈ മാസം എത്ര തർബിയ്യത് യോഗം സംഘടിപ്പിച്ചു?</label>
@@ -680,9 +720,11 @@ if(isset($_SESSION["user_name"]))
 												<input type="text" name="b5c16" class="form-control ignore" id="b5c16" <?php if(isset($b5c16)) echo 'value='.$b5c16;?>>
 											</div>											
 											
-											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next" onclick="Block5(<?php echo $year.','.$month;?>)">Next</button>
+											<button type="button" class="btn btn-previous btn-primary">Previous</button>
+											<button type="button" class="btn btn-next btn-primary" onclick="Block5(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
+										<br/>
+										<button style="float:center" class="btn btn-success" onClick="Save5(<?php echo $year.','.$month;?>)">Save & Exit  <i class="fas fa-save"></i></button>										
 									</fieldset>
 									<!------------------ BLOCK 5 End ------------------------->
 
@@ -696,7 +738,7 @@ if(isset($_SESSION["user_name"]))
 										<div class="form-bottom">
 											<div class="form-group">
 												<label for="b6c1">നാസിം തബ്‌ലീഗിൻ്റെ പേര്</label>
-												<input type="text" name="b6c1" class="form-control" id="b6c1" <?php if(isset($b6c1)) echo 'value="'.$b6c1.'"'?>>
+												<input type="text" name="b6c1" class="form-control" required id="b6c1" <?php if(isset($b6c1)) echo 'value="'.$b6c1.'"'?>>
 											</div>
 											<div class="form-group">
 												<table border="1" width="90%">
@@ -800,11 +842,86 @@ if(isset($_SESSION["user_name"]))
 													<option <?php if(isset($b6c25) && $b6c25 == 'Yes') echo 'selected';?> value="Yes">Yes</option>
 												</select>	
 											</div>											
-											<button type="button" class="btn btn-previous">Previous</button>
-											<button type="button" class="btn btn-next" onclick="Block6(<?php echo $year.','.$month;?>)">Next</button>
+											<button type="button" class="btn btn-previous btn-primary">Previous</button>
+											<button type="button" class="btn btn-next btn-primary" onclick="Block6(<?php echo $year.','.$month;?>)">Next</button>
 										</div>
+										<br/>
+										<button style="float:center" class="btn btn-success" onClick="Save6(<?php echo $year.','.$month;?>)">Save & Exit  <i class="fas fa-save"></i></button>										
 									</fieldset>
-									<!------------------ BLOCK 6 End ------------------------->									
+									<!------------------ BLOCK 6 End ------------------------->
+
+
+									<!------------------ BLOCK 7 ------------------------->	
+									<fieldset id="f7">
+										<div class="form-top">
+											<div class="form-top-left">
+												<h3>7. ശുഅബ നൗ മുബാഈൻ  </h3>
+											</div>
+										</div>
+										<div class="form-bottom">
+											<div class="form-group">
+												<label for="b7c1">നാസിം മുബാഈൻറെ പേര്</label>
+												<input type="text" name="b7c1" class="form-control" required id="b7c1" <?php if(isset($b7c1)) echo 'value="'.$b7c1.'"'?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c2">നൗ മുബാഈൻ ഖുദ്ദാമിൻറെ എണ്ണം</label>
+												<input type="text" name="b7c2" class="form-control ignore" id="b7c2" <?php if(isset($b7c2)) echo 'value='.$b7c2;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c3">നൗ മുബാഈൻ അത്ഫാലിൻറെ എണ്ണം</label>
+												<input type="text" name="b7c3" class="form-control ignore" id="b7c3" <?php if(isset($b7c3)) echo 'value='.$b7c3;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c4">ഈ മാസം എത്ര നൗ മുബാഈൻ ക്ലാസ് നടത്തി?</label>
+												<input type="text" name="b7c4" class="form-control ignore" id="b7c4" <?php if(isset($b7c4)) echo 'value='.$b7c4;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c5">5 നേരം നമസ്കാരം കൃത്യമായി നിർവഹിക്കുന്ന നൗ മുബാഈൻറെ എണ്ണം</label>
+												<input type="text" name="b7c5" class="form-control ignore" id="b7c5" <?php if(isset($b7c5)) echo 'value='.$b7c5;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c6">തർബിയ്യത് ക്ലാസ്സുകളിൽ പങ്കെടുക്കുന്ന നൗ മുബാഈൻറെ എണ്ണം</label>
+												<input type="text" name="b7c6" class="form-control ignore" id="b7c6" <?php if(isset($b7c6)) echo 'value='.$b7c6;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c7">എത്ര നൗ മുബാഈൻ ഹുസൂറിൻറെ ഖുതുബകളും പ്രഭാഷണവും സ്ഥിരമായി കേൾക്കുന്നുണ്ട്?</label>
+												<input type="text" name="b7c7" class="form-control ignore" id="b7c7" <?php if(isset($b7c7)) echo 'value='.$b7c7;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c8">സ്ഥിരമായി ബാജമാഅത്ത് നമസ്കാരത്തിൽ പങ്കെടുക്കുന്ന നൗ മുബാഈൻറെ എണ്ണം</label>
+												<input type="text" name="b7c8" class="form-control ignore" id="b7c8" <?php if(isset($b7c8)) echo 'value='.$b7c8;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c9">എല്ലാ ദിവസവും ഖുർആൻ ഓതുന്ന നൗ മുബാഈൻറെ എണ്ണം</label>
+												<input type="text" name="b7c9" class="form-control ignore" id="b7c9" <?php if(isset($b7c9)) echo 'value='.$b7c9;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c10">ഈ മാസം എത്ര നൗ മുബാഈൻ ഹുസൂറിന് ദു:ആക്  കത്തെഴുതി?</label>
+												<input type="text" name="b7c10" class="form-control ignore" id="b7c10" <?php if(isset($b7c10)) echo 'value='.$b7c10;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c11">എത്ര നൗ മുബാഈൻ ദാഈനെ ഇലല്ലാഹ് ആയി?</label>
+												<input type="text" name="b7c11" class="form-control ignore" id="b7c11" <?php if(isset($b7c11)) echo 'value='.$b7c11;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c12">ഈ മാസം എത്ര മജ്‌ലിസുകളിൽ നൗ മുബാഈനു വേണ്ടി തർബിയ്യത് ക്യാമ്പ് നടത്തി?</label>
+												<input type="text" name="b7c12" class="form-control ignore" id="b7c12" <?php if(isset($b7c12)) echo 'value='.$b7c12;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c13">ഈ മാസം എത്ര നൗ മുബാഈനുമായി മുലാഖാത്ത് നടത്തി?</label>
+												<input type="text" name="b7c13" class="form-control ignore" id="b7c13" <?php if(isset($b7c13)) echo 'value='.$b7c13;?>>
+											</div>
+											<div class="form-group">
+												<label for="b7c14">എത്ര നൗ മുബാഈൻ സാമ്പത്തിക പദ്ധതിയിൽ ചേർന്നു?</label>
+												<input type="text" name="b7c14" class="form-control ignore" id="b7c14" <?php if(isset($b7c14)) echo 'value='.$b7c14;?>>
+											</div>											
+											<button type="button" class="btn btn-previous btn-primary">Previous</button>
+											<button type="button" class="btn btn-next btn-primary" onclick="Block7(<?php echo $year.','.$month;?>)">Next</button>
+										</div>
+										<br/>
+										<button style="float:center" class="btn btn-success" onClick="Save7(<?php echo $year.','.$month;?>)">Save & Exit  <i class="fas fa-save"></i></button>										
+									</fieldset>
+									<!------------------ BLOCK 7 End ------------------------->									
 								</form>		
 							</div>
 						</div>

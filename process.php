@@ -435,5 +435,70 @@ if(isset($_SESSION["user_name"]))
 		
 		echo $error;				
 	}	
+	
+	
+	//BLOCK 7
+	else if(isset($_POST['block7']))
+	{
+		$block7 = json_decode($_POST['block7'],true);
+		$year = (int)$block7["year"];
+		$month = (int)$block7["month"];
+		$reportQuery = mysqli_query($con, "SELECT id FROM reports WHERE jamath = $jamath AND year = $year AND month = $month");
+		if($reportQuery)
+		{
+			$report = mysqli_fetch_Array($reportQuery,MYSQLI_ASSOC);
+			$reportId = $report['id'];			
+			
+			$b7c1 = $block7["c1"];
+			$b7c2 = $block7["c2"];
+			$b7c3 = $block7['c3'];
+			$b7c4 = $block7["c4"];
+			$b7c5 = $block7["c5"];
+			$b7c6 = $block7["c6"];
+			$b7c7 = $block7["c7"];
+			$b7c8 = $block7["c8"];
+			$b7c9 = $block7["c9"];
+			$b7c10 = $block7["c10"];
+			$b7c11 = $block7["c11"];
+			$b7c12 = $block7["c12"];
+			$b7c13 = $block7["c13"];
+			$b7c14 = $block7["c14"];
+			
+			$search7 = mysqli_query($con, "SELECT * FROM block7 WHERE report_id=$reportId");
+			if(mysqli_num_rows($search7) <=0)
+			{
+				$query7="INSERT INTO block7 (report_id,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14)
+					 VALUES
+					 ($reportId,'$b7c1','$b7c2','$b7c3','$b7c4','$b7c5','$b7c6','$b7c7','$b7c8','$b7c9','$b7c10',
+					  '$b7c11','$b7c12','$b7c13','$b7c14')";
+
+				$insert7 = mysqli_query($con, $query7);	
+				if(!$insert7)
+					$error =  mysqli_error($con);
+				else
+				{
+					$updateStatus = mysqli_query($con,"UPDATE reports SET status=7 WHERE id='$reportId'");
+					if(!$updateStatus)
+						$error =  mysqli_error($con);
+				}				
+			}
+			else
+			{
+				$query7="UPDATE block7 SET c1='$b7c1',c2='$b7c2',c3='$b7c3',c4='$b7c4',c5='$b7c5',c6='$b7c6',
+						c7='$b7c7',c8='$b7c8',c9='$b7c9',c10='$b7c10',c11='$b7c11',c12='$b7c12',c13='$b7c13',c14='$b7c14',
+						WHERE report_id=$reportId";
+
+				$update7 = mysqli_query($con, $query7);	
+				if(!$update7)
+					$error =  mysqli_error($con);																
+			}
+		}
+		else
+		{
+			$error = mysqli_error($con);
+		}
+		
+		echo $error;				
+	}	
 }
 ?>

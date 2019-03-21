@@ -291,4 +291,51 @@ function Block6(year,month){
 			alert(response);
 	}
   });
-}s
+}
+
+function Block7(year,month){
+  var c1 = $("input#b6c1").val();
+  var c2 = $("input#b6c2").val();
+  var c3 = $("input#b6c3").val();
+  var c4 = $("input#b6c4").val();
+  var c5 = $("input#b6c5").val();
+  var c6 = $("input#b6c6").val();
+  var c7 = $("input#b6c7").val();
+  var c8 = $("input#b68").val();
+  var c9 = $("input#b6c9").val();
+  var c10 = $("input#b6c10").val();
+  var c11 = $("input#b6c11").val();
+  var c12 = $("input#b6c12").val();
+  var c13 = $("input#b6c13").val();
+  var c14 = $("input#b6c14").val();
+  
+  var dataArray = {
+	"c1":c1,
+	"c2":c2,
+	"c3":c3,
+	"c4":c4,
+	"c5":c5,
+	"c6":c6,
+	"c7":c7,
+	"c8":c8,
+	"c9":c9,
+	"c10":c10,
+	"c11":c11,
+	"c12":c12,
+	"c13":c13,
+	"c14":c14,
+	"year":year,
+	"month":month
+  };
+ 
+  jQuery.ajax({
+	type: "POST",
+	url: "process.php",
+	data: {block7 : JSON.stringify(dataArray)},
+	cache: false,
+	success: function(response){
+		if (response)
+			alert(response);
+	}
+  });
+}
